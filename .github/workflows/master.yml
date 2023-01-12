@@ -39,8 +39,9 @@ jobs:
       - name: Deploy in docker
         env: 
             GH_TOKEN: ${{secrets.GH_TOKEN}}
-        run: docker build -t ${{matrix.DOCKER_IMAGE_NAME}} .
-        run: echo ${{DOCKER_PASSWORD}} | docker login -u ${{DOCKER_USERNAME}} --password-stdin
-        run: docker tag ${{matrix.DOCKER_IMAGE_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
-        run: docker commit ${{matrix.DOCKER_CONTAINER_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_Rv2AME}}:v2
-        run: docker push ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
+        run:  | 
+          docker build -t ${{matrix.DOCKER_IMAGE_NAME}} .
+          echo ${{DOCKER_PASSWORD}} | docker login -u ${{DOCKER_USERNAME}} --password-stdin
+          docker tag ${{matrix.DOCKER_IMAGE_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
+          docker commit ${{matrix.DOCKER_CONTAINER_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_Rv2AME}}:v2
+          docker push ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
