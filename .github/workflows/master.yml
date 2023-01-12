@@ -10,9 +10,9 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-        DOKER_REPO_NAME: 'angular-demo'
-        DOCKER_IMAGE_NAME: 'angular-demo'
-        DOCKER_CONTAINER_NAME: 'angular-container'
+        DOKER_REPO_NAME: [angular-demo]
+        DOCKER_IMAGE_NAME: [angular-demo]
+        DOCKER_CONTAINER_NAME: [angular-container]
     
     steps:
       - name: Checkout
