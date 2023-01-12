@@ -1,8 +1,8 @@
 FROM node:latest as node
-WORKDIR /app
-COPY . .
+WORKDIR /usr/src/myapp
+COPY . /usr/src/myapp
 RUN npm install
 RUN npm run build --prod
 
 FROM nginx:alpine
-COPY --from=node /app/dist/angular-docker-demo /usr/share/nginx/html
+COPY --from=node /usr/src/myapp/dist/angular-docker-demo /usr/share/nginx/html

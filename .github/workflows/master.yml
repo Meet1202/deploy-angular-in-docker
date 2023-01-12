@@ -1,0 +1,46 @@
+name: Deploy master
+on:
+  push:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        DOKER_REPO_NAME: 'angular-demo'
+        DOCKER_IMAGE_NAME: 'angular-demo'
+        DOCKER_CONTAINER_NAME: 'angular-container'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install and npm run build
+        run: |
+          npm ci
+          npm run build
+      
+      - name: Lint
+        run: |
+          npm run lint
+          
+      - name: Test
+        run: |
+          npm run test
+      
+      - name: Deploy in docker
+        env: 
+            GH_TOKEN: ${{secrets.GH_TOKEN}}
+      - run: docker build -t ${{matrix.DOCKER_IMAGE_NAME}} .
+      - run: echo ${{DOCKER_PASSWORD}} | docker login -u ${{DOCKER_USERNAME}} --password-stdin
+      - run: docker tag ${{matrix.DOCKER_IMAGE_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
+      - run: docker commit ${{matrix.DOCKER_CONTAINER_NAME}} ${{DOCKER_USERNAME}}/${{matrix.DOKER_Rv2AME}}:v2
+      - run: docker push ${{DOCKER_USERNAME}}/${{matrix.DOKER_REPO_NAME}}:v2
