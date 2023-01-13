@@ -11,7 +11,7 @@ jobs:
       matrix:
         node-version: [14.x]
         DOKER_REPO_NAME: [angular-demo]
-        DOCKER_IMAGE_NAME: [angular-demo]
+        DOCKER_IMAGE_NAME: [angulardemo]
         DOCKER_CONTAINER_NAME: [angular-container]
     
     steps:
