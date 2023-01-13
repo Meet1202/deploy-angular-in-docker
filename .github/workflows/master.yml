@@ -45,5 +45,5 @@ jobs:
           docker build -t angulardemo .
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker tag angulardemo meetshah1202/angular-demo:v2
-          docker commit "$matrix.DOCKER_CONTAINER_NAME" meetshah1202/angular-demo:v2
+          docker commit angular-container meetshah1202/angular-demo:v2
           docker push meetshah1202/angular-demo:v2
