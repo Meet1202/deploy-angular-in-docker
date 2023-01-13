@@ -45,7 +45,7 @@ jobs:
           docker build -t angulardemo .
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker pull meetshah1202/angular-demo:v1
+          docker run --name angular-container -it -d angular-demo:v1
           docker tag angulardemo meetshah1202/angular-demo:v2
-          docker run --name angular-container -it -d angular-demo:v2
           docker commit angular-container meetshah1202/angular-demo:v2
           docker push meetshah1202/angular-demo:v2
