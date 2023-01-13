@@ -42,8 +42,8 @@ jobs:
             DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
             DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run:  | 
-          docker build -t ${{matrix.DOCKER_IMAGE_NAME}} .
+          docker build -t angulardemo .
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker tag "$matrix.DOCKER_IMAGE_NAME" "$DOCKER_USERNAME"/"$matrix.DOKER_REPO_NAME":v2
-          docker commit "$matrix.DOCKER_CONTAINER_NAME" "$DOCKER_USERNAME"/"$matrix.DOKER_REPO_NAME":v2
-          docker push "$DOCKER_USERNAME"/"$matrix.DOKER_REPO_NAME":v2
+          docker tag angulardemo meetshah1202/angular-demo:v2
+          docker commit "$matrix.DOCKER_CONTAINER_NAME" meetshah1202/angular-demo:v2
+          docker push meetshah1202/angular-demo:v2
