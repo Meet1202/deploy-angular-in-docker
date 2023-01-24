@@ -1,5 +1,5 @@
 FROM node:latest as node
-Label author: 'Meet Shah'
+LABEL author: 'Meet Shah'
 WORKDIR /usr/src/myapp
 COPY . /usr/src/myapp
 RUN npm install
